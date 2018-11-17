@@ -13,8 +13,8 @@ import javax.swing.*;
 public class Ventana extends JFrame {
 
     private JButton cañeria, codo, borrar;
-    private JButton girarCodo,volverCodo;   
-    private JPanel panel2,panel3;
+    private JButton girarCodo,volverCodo,boton;   
+    private JPanel panel2,panel3,panel0;
     private JLayeredPane panel1;
     private ManejadorVistas controladorVistas = new ManejadorVistas();
     
@@ -27,8 +27,8 @@ public class Ventana extends JFrame {
         
         super("FLUJO 2018"); //-- LE PONEMOS UN TITULO
         setSize(1200, 700); //-- LE DAMOS UN TAMAÑO A LA VENTANA
-        
-        setLayout(null);
+        BorderLayout dist = new BorderLayout();
+        setLayout(dist);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //-- HACEMOS QUE LA VENTANA SE CIERRE POR DEFAULT
         iniciarComponentes();
         
@@ -59,34 +59,43 @@ public class Ventana extends JFrame {
     private void iniciarPaneles(){       
         panel1 = new JLayeredPane();
         panel1.setOpaque(true);
-        panel1.setBackground(Color.WHITE);
-        panel1.setBounds(0,0,900, 700);
-        panel1.setLayout(null);       
+        panel1.setBackground(Color.WHITE);          
         
         panel2 = new JPanel();
-        panel2.setBackground(Color.DARK_GRAY);
-        panel2.setBounds(900, 0, 300, 700);
-        panel2.setLayout(null);        
+        GridLayout distPanel2 = new GridLayout(3, 1);
+        panel2.setPreferredSize(new Dimension(200, WIDTH));
+        panel2.setLayout(distPanel2);
+        panel2.setBackground(Color.DARK_GRAY);   
         panel2.add(cañeria);
         panel2.add(codo);
         panel2.add(borrar);
+
         
         panel3 = new JPanel();
         panel3.setBackground(Color.LIGHT_GRAY);
-        panel3.setBounds(900, 0, 300, 700);
-        panel3.setLayout(null);
         panel3.add(girarCodo);
-        panel3.add(volverCodo);       
+        panel3.add(volverCodo);
+
+        
+        panel0 = new JPanel();
+        CardLayout distPanel0 = new CardLayout();
+        panel0.setLayout(distPanel0);
+        panel0.add(panel2);
+        panel0.add(panel3);
+        
      
-        add(panel1);
-        add(panel2);
-        add(panel3);
+        add(panel1,BorderLayout.CENTER);
+        add(panel0,BorderLayout.WEST);
+      
+        
     } 
     
     private void iniciarBotones(){
+        
 //--Intancio boton cañeria
         cañeria = new JButton("CAÑERIA");
-        cañeria.setBounds(100, 20, 100, 20);
+        cañeria.setBounds(100, 20,200, 20);
+        
         cañeria.addActionListener(new java.awt.event.ActionListener() {
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +103,7 @@ public class Ventana extends JFrame {
             }
         });
 //--Intancio boton codo
-        codo = new JButton("CODOS");        
+        codo = new JButton(" CODOS  ");        
         codo.setBounds(100, 40, 100, 20);
         codo.addActionListener(new java.awt.event.ActionListener() {
             @Override
