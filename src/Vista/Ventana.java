@@ -16,6 +16,7 @@ public class Ventana extends JFrame {
     private JButton girarCodo,volverCodo,boton;   
     private JPanel panel2,panel3,panel0;
     private JLayeredPane panel1;
+    private JScrollPane panel4;
     private ManejadorVistas controladorVistas = new ManejadorVistas();
     
     
@@ -28,7 +29,7 @@ public class Ventana extends JFrame {
         super("FLUJO 2018"); //-- LE PONEMOS UN TITULO
         setSize(1200, 700); //-- LE DAMOS UN TAMAÑO A LA VENTANA
         BorderLayout dist = new BorderLayout();
-        setLayout(dist);
+        setLayout(new BorderLayout());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //-- HACEMOS QUE LA VENTANA SE CIERRE POR DEFAULT
         iniciarComponentes();
         
@@ -59,7 +60,11 @@ public class Ventana extends JFrame {
     private void iniciarPaneles(){       
         panel1 = new JLayeredPane();
         panel1.setOpaque(true);
-        panel1.setBackground(Color.WHITE);          
+        panel1.setPreferredSize(new Dimension(10000,10000));
+        panel1.setBackground(Color.WHITE);   
+        
+        panel4 = new JScrollPane();
+        panel4.setViewportView(panel1);
         
         panel2 = new JPanel();
         GridLayout distPanel2 = new GridLayout(3, 1);
@@ -84,7 +89,7 @@ public class Ventana extends JFrame {
         panel0.add(panel3);
         
      
-        add(panel1,BorderLayout.CENTER);
+        add(panel4,BorderLayout.CENTER);
         add(panel0,BorderLayout.WEST);
       
         
